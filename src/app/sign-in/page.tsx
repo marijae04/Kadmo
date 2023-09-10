@@ -19,6 +19,7 @@ export default function SignInPage(){
                 <form action="login">
                     <input type="text" name="username" placeholder="Username" />
                     <input type="password" name="password" placeholder="Password" />
+                    <button type="submit">Login</button>
                 </form>
             </div>
             <div className="register-container">
@@ -28,6 +29,7 @@ export default function SignInPage(){
                     <input type="email" name="email" placeholder="email@gmail.com" />
                     <input type="text" name="username" placeholder="Username" />
                     <input type="password" name="password" placeholder="Password" />
+                    <button type="submit">Register</button>
                 </form>
             </div>
         </div>
