@@ -5,7 +5,7 @@ import { Continent } from "../enums/continent.enum";
 export async function getPostsAction(filters?: { continent?: Continent, country?: string}){
     try{
         console.log("Getting posts")
-        const posts = await prisma.post.findMany({});
+        const posts = await prisma.post.findMany({ include: { author: true, country: true}});
         console.log("Got posts")
         console.log(posts);
         return { posts }

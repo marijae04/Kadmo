@@ -1,8 +1,8 @@
-import { Post } from "@prisma/client"
+import { Country, Post, User } from "@prisma/client"
 import React from 'react';
 
 interface PostCardProps {
-  post: Post;
+  post: Post & { author: User } & { country: Country};
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
@@ -12,6 +12,8 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     imageURL,
     category,
     authorId,
+    author,
+    country,
     createdAt,
     updatedAt,
     countryId,
@@ -30,7 +32,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <p className="text-sm text-gray-800 mb-5">{content}</p>
         <div className="grid grid-cols-3 sm:grid-cols-1 gap-1 text-xs text-gray-500">
           <div className="mb-1">
-            <strong>Country:</strong> {countryId}
+            <strong>Country:</strong> {country.name}
           </div>
           <div className="mb-1">
             <strong>Category:</strong> {category}
@@ -40,6 +42,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           </div>
           <div className="mb-1">
             <strong>Updated At:</strong> {updatedAt.toLocaleString()}
+          </div>
+          <div className="mb-1">
+            <strong>Author:</strong> {author.name}
           </div>
         </div>
         <div className="text-sm text-gray-500 mt-1">
