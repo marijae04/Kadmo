@@ -12,13 +12,12 @@ export default function Home() {
   const [posts, setPosts] = useState<Post[] | undefined>([]);
 
   useEffect(() => {
-    if(posts && posts.length > 0){
       (async()=>{
+        console.log("Getting posts")
         let response = await getPostsAction();
         
         setPosts(response.posts);
       })();
-    }
   }, []);
 
   const { data: session, status } = useSession();
@@ -39,13 +38,15 @@ export default function Home() {
       <div>
 
         <div>
-          <h1 className="text-white">Posts total: { posts?.length ?? 0} </h1>
+          <h1 className="text-white">Posts total: {posts?.length ?? 0} </h1>
 
-          {
-            posts && posts.map((post, index) => {
-              return <PostCard key={index} post={post} index={index}/>
-            })
-          }
+          <div className="grid gap-4 grid-cols-3 grid-rows-3 ">
+            {
+              posts && posts.map((post, index) => {
+                return <PostCard key={index} post={post} index={index} />
+              })
+            }
+          </div>
         </div>
       </div>
     </>
