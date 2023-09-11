@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useState, useCallback, useEffect } from "react";
 import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import AppBarItem from '../app/AppBarItem';
+import AppBarItem from "./AppBarItems";
 
 const TOP_OFFSET = 66;
 
@@ -35,15 +35,14 @@ const AppBar = () => {
     <nav className={`w-full fixed z-40 ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}`}>
       <div className="px-4 md:px-16 py-6 flex flex-row items-center transition duration-500">
         <Link href="/" passHref>
-          <a>
             <img src="/images/logo.png" className="h-4 lg:h-7" alt="Logo" />
-          </a>
         </Link>
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <AppBarItem label="Home" />
-          <AppBarItem label="Destination" />
-          <AppBarItem label="Receipt" />
-          <AppBarItem label="Music" />
+          <AppBarItem href="home" label="Home" />
+          <AppBarItem href="destinations" label="Destination" />
+          <AppBarItem href="recipes" label="Recipes" />
+          <AppBarItem href="music" label="Music" />
+          <AppBarItem href="events" label="Events" />
         </div>
         <div onClick={toggleMenu} className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
           <p className="text-white text-sm">Browse</p>

@@ -3,20 +3,18 @@
 import { useSession, getSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import { useEffect, useState } from "react";
-import { getPostsAction } from "../actions/get-posts.action";
-import { Post } from "@prisma/client";
-import PostCard from "./Post-card";
-import AppBar from "./AppBar";
-import { getUserLikedPostsAction } from "../actions/get-user-liked-posts.action";
+import { Category, Post } from "@prisma/client";
+import { getPostsAction } from "../../actions/get-posts.action";
+import PostCard from "../Post-card";
 
-export default function Home() {
+export default function Recipes() {
 
   const [posts, setPosts] = useState<Post[] | undefined>([]);
 
   useEffect(() => {
       (async()=>{
         console.log("Getting posts")
-        let response = await getPostsAction();
+        let response = await getPostsAction({ category: Category.Recipe});
         
         setPosts(response?.posts);
       })();
