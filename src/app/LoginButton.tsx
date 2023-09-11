@@ -9,7 +9,7 @@ const LoginButton = () => {
       {session?.user ? (
         <>
           <p className="text-sky-600"> {session.user.name}</p>
-          <button className="text-red-500" onClick={() => signOut()}>
+          <button className="text-white rounded-md bg-green-700 hover:bg-green-900" onClick={() => signOut()}>
             Sign Out
           </button>
         </>

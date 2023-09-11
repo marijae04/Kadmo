@@ -70,7 +70,6 @@ export default function SignInPage() {
         
         <div className="">
             <div className="bg-black w-full h-full bg-opacity-70">
-
                 <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center">
                     <div className="text-white text-center p-12 rounded-lg flex-1 order-2 mt-5 sm:order-1">
                         <div className="text-4xl mb-4 font-semibold">Log in</div>

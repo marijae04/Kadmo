@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getPostsAction } from "../actions/get-posts.action";
 import { Post } from "@prisma/client";
 import PostCard from "./Post-card";
+import AppBar from "./AppBar";
 
 export default function Home() {
 
@@ -41,11 +42,12 @@ export default function Home() {
   
           <hr className="border-t-2 border-primary mx-5 my-2 pt-5" />
           
-          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid gap-x-0 gap-y-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             
             {posts && posts.map((post, index) => {
               return (
                 <div key={index}>
+
                   <PostCard post={post} />
                 </div>
               );
