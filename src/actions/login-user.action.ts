@@ -19,7 +19,6 @@ export async function loginUser(obj:{username: string, password:string}){
         if(user.password !== hashedPassword){
             return { error: 'Invalid password'}
         }
-
         console.log("Successful login");
         return user;
 

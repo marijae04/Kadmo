@@ -27,7 +27,7 @@ export default function SignInPage() {
         redirect: false,
         callbackUrl: '/',
       });
-
+      
       if (signInResponse?.error && signInResponse.error === 'CredentialsSignin') {
         alert('Invalid username or password');
       } else if (signInResponse?.error) {

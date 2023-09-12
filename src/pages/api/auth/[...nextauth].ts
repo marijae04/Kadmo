@@ -19,13 +19,13 @@ export default NextAuth({
         // Add logic here to look up the user from the credentials supplied
 
         const username = credentials?.username;
-        const password = credentials?.username;
+        const password = credentials?.password;
 
         if(!username || !password) return null;
 
         const user = await loginUser({ username, password });
 
-        console.log(user)
+        if((user as any).error) return null;
 
         return user as any;
       },
@@ -39,14 +39,12 @@ export default NextAuth({
 
   callbacks: {
     session: async ({session, token, user}) => {
-      if(!user && session.user){
+      if(!user && session.user && session.user.email){
+
         (user as any) = await prisma.user.findUnique({ where: { email: session.user?.email! }});
         ((session.user as any).id as any)= (user as any).id;
       }
 
-    
-      // const dbUser: any = user;
-      // (session.user as any).id = dbUser.id;
       return session;
     }
   },

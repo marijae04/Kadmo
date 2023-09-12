@@ -1,15 +1,16 @@
 
 "use client"
 import { useSession, getSession } from "next-auth/react"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react";
 import { Category, Post } from "@prisma/client";
 import { getPostsAction } from "../../actions/get-posts.action";
 import PostCard from "../Post-card";
 
-export default function Recipes() {
+export default function Music() {
 
   const [posts, setPosts] = useState<Post[] | undefined>([]);
+  const router = useRouter()
 
   useEffect(() => {
       (async()=>{
@@ -28,9 +29,7 @@ export default function Recipes() {
 
   if (status === "unauthenticated") {
     //redirect to sign-in page
-
-    redirect("/sign-in");
-    return <p>Access Denied</p>
+    return router.push('/sign-in');
   }
 
   return (
