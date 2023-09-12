@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { useSession, getSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { getPostsAction } from "../actions/get-posts.action";
 import { Post } from "@prisma/client";
 import PostCard from "./Post-card";
 import Search from "../app/Search";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | undefined>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const { data: session, status } = useSession();
+  const router = useRouter()
 
   useEffect(() => {
     (async () => {
@@ -22,13 +22,15 @@ export default function Home() {
     })();
   }, []);
 
+  const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
 
   if (status === "unauthenticated") {
-    redirect("/sign-in");
-    return <p>Access Denied</p>;
+    return router.push('/sign-in');
+    // return <p>Access Denied</p>;
   }
 
   const handleSearch = (query: string) => {
