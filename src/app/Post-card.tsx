@@ -23,8 +23,8 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
     songURL,
   } = post;
 
-  const [liked, setLiked] = useState(likedPost);
-  const [saved, setSaved] = useState(savedPost);
+  const [liked, setLiked] = useState<boolean | undefined>(undefined);
+  const [saved, setSaved] = useState<boolean | undefined>(undefined);
 
   const handleLike = () => {
     if(liked){
@@ -76,12 +76,9 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
   }
 
   const handleSave = () => {
-    console.log("handleSave",saved)
     if(saved){
-      console.log("SALJEM unsavePost")
       unsavePost()
     }else{
-      console.log("SALJEM SAVE")
       savePost()
     }
   };
@@ -136,14 +133,14 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
       />
       <div className="flex items-left mb-2 mt-2 ml-2 mr-2 cursor-pointer">
         <button onClick={handleLike}>
-          {liked ? (
+          {(liked ?? likedPost) ? (
             <HeartIcon className="w-5 h-5 text-red-700" />
           ) : (
             <HeartIcon className="w-5 h-5 text-gray-400 hover:gray-100 hover:opacity-50" />
           )}
         </button>
         <button onClick={handleSave}>
-          {saved ? (
+          {(saved ?? savedPost) ? (
             <BookmarkIcon className="w-5 h-5 text-black" />
           ) : (
             <BookmarkIcon className="w-5 h-5 text-gray-400 hover:gray-100 hover:opacity-50" />

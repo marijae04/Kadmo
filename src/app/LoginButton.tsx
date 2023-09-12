@@ -8,12 +8,12 @@ const LoginButton = () => {
   return (
     <div className="ml-auto flex gap-2">
       {session?.user ? (
-        <>
-          <p className="text-sky-600"> {session.user.name}</p>
-          <button className="text-white rounded-md bg-green-700 hover:bg-green-900" onClick={() => signOut()}>
+        <div className="flex items-center">
+          <p className="text-sky-600 font-bold  mr-2"> {session.user.name}</p>
+          <button className="text-red-400 font-bold p-1 rounded-md hover:bg-black-900" onClick={() => signOut()}>
             Sign Out
           </button>
-        </>
+        </div>
       ) : <></>}
     </div>
   );

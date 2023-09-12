@@ -58,8 +58,9 @@ export default function Home() {
           <div className="grid gap-x-0 gap-y-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {filteredPosts?.map((post, index) => {
               return (
-                <div key={index}>
+                <div>
                   <PostCard
+                    key={index}
                     likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
                     savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
                     post={post as any}

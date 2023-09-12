@@ -5,6 +5,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { MagnifyingGlassIcon, UserCircleIcon, ChevronDownIcon, ChevronUpIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import AppBarItem from "./AppBarItems";
 import MobileMenu from "./MobileMenu";
+import LoginButton from "./LoginButton";
 
 const TOP_OFFSET = 66;
 
@@ -60,6 +61,8 @@ const AppBar = () => {
             <span className="text-gray-200 hover:text-gray-300 cursor-pointer transition">Add Post</span>
           </a>
         </div>
+
+        <LoginButton/>
 
         <Link href="/profile">
           <div className="lg:flex items-center gap-4 ml-5 cursor-pointer relative">

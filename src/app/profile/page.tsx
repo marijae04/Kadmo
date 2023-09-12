@@ -1,15 +1,54 @@
 
 "use client"
-import { Post } from "@prisma/client";
-import { useState } from "react";
+import { Post } from '@prisma/client';
+import { useSession } from 'next-auth/react';
+import router from 'next/router';
+import { useEffect, useState } from 'react';
+import { getPostsAction } from '../../actions/get-posts.action';
+import PostCard from '../Post-card';
 
 const Profile = () => {
-  const [name, setName] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [savedPosts, setSavedPosts] = useState<Post[]>([]);
-  const [likedPosts, setLikedPosts] = useState<Post[]>([]);
-  const [userPosts, setUserPosts] = useState<Post[]>([]);
+  
+  const [name, setName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const [selectedPosts, setSelectedPosts] = useState<"My posts" | "Saved posts" | "Liked posts">("My posts");
+
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    getPosts("My posts");
+  }, [])
+
+  const getPosts = async (postType: typeof selectedPosts) => {
+    setSelectedPosts(postType);
+    getPostsAction({ type: postType})
+    .then(response =>{
+      if(response.error){
+        console.log(response.error);
+        alert(`Error getting posts: ${response.error}`);
+      }else{
+        setPosts(response.posts as any);
+      }
+    })
+    .catch(error =>{
+      console.log(error);
+      alert('Error getting posts');
+    })
+  }
+
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    //redirect to sign-in page
+
+    return router.push('/sign-in');
+  }
 
   const user = {
     name: "Pera",
@@ -71,7 +110,7 @@ const Profile = () => {
       </div>
 
       <div className="mt-8 flex ">
-      <div className="mb-8 w-full p-3">
+      <div onClick={() => getPosts("Saved posts")} className="cursor-pointer mb-8 w-full p-3">
           <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               Saved Posts
@@ -79,7 +118,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mb-8 w-full p-3">
+        <div onClick={() => getPosts("Liked posts")} className="cursor-pointer mb-8 w-full p-3">
           <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               Liked Posts
@@ -87,14 +126,33 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mb-8 w-full p-3">
+        <div onClick={() => getPosts("My posts")} className="cursor-pointer mb-8 w-full p-3">
           <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
-              Your Posts
+              My Posts
             </h2>
           </div>
         </div>
 
+      </div>
+
+      <div>
+        <h2 className="text-4xl text-white font-semibold mb-4 text-center">
+          {selectedPosts}
+        </h2>
+        <div>
+          {
+            posts?.map((post, index)  => {
+
+              return <PostCard
+              key={index}
+              likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
+              savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
+              post={post as any}
+            />
+            })
+          }
+        </div>
       </div>
     </div>
   );
