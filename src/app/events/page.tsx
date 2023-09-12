@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import { Category, Post } from "@prisma/client";
 import { getPostsAction } from "../../actions/get-posts.action";
 import PostCard from "../Post-card";
+import Search from "../Search";
 
 export default function Events() {
 
   const [posts, setPosts] = useState<Post[] | undefined>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const router = useRouter()
 
   useEffect(() => {
@@ -33,11 +35,23 @@ export default function Events() {
     return router.push('/sign-in');
   }
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const filteredPosts = searchQuery
+    ? posts?.filter((post) =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : posts;
+
   return (
     <>
       <div>
         <div>
-          <h1 className="text-white text-2xl font-semibold text-primary mt-10 ml-5 mb-1">NEWS: {posts?.length ?? 0} </h1>
+          <div className="flex justify-center w-full mr-5 mt-16">
+            <Search onSearch={handleSearch} />
+          </div>
           
           <div className="grid gap-x-0 gap-y-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             
