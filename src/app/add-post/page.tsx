@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Category, Country } from "@prisma/client";
 import Link from "next/link";
+import { createPostAction } from "../../actions/create-post-action";
 
 const AddPost: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -39,13 +40,27 @@ const AddPost: React.FC = () => {
       country,
     };
 
-    console.log("Post data:", post);
+    
+    createPostAction({ title, content, imageURL: imageUrl, category, country })
+    .then(response =>{
+      if(response?.error){
+        console.log(response.error)
+        alert(`Error creating post: ${response.error}`)
+      }else{
+        alert('Post created successfully');
+        setTitle("");
+        setContent("");
+        setImageUrl("");
+        setCategory("Destination");
+        setCountry("");
+      }
+    })
+    .catch(error =>{
+      console.log(error);
+      alert('Error creating post');
+    })
 
-    setTitle("");
-    setContent("");
-    setImageUrl("");
-    setCategory("Destination");
-    setCountry("");
+    
   };
 
   return (
@@ -120,6 +135,7 @@ const AddPost: React.FC = () => {
         </div>
         {renderSongUrlInput()}
         <button
+          onSubmit={handleSubmit}
           type="submit"
           className="bg-green-700 text-white font-bold py-2 px-4 rounded-full hover:bg-green-900"
         >

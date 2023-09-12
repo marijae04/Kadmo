@@ -5,7 +5,7 @@ import { Continent } from "../enums/continent.enum";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-export async function getPostsAction(filters?: { continent?: Continent, country?: string, category?: Category, type: "My posts" | "Saved posts" | "Liked posts"}){
+export async function getPostsAction(filters?: { continent?: Continent, country?: string, category?: Category, type?: "My posts" | "Saved posts" | "Liked posts"}){
     try{
 
         const session = await getServerSession();
