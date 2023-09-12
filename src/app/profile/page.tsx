@@ -1,23 +1,23 @@
 
 "use client"
-import { Post } from '@prisma/client';
-import { useState } from 'react';
+import { Post } from "@prisma/client";
+import { useState } from "react";
 
 const Profile = () => {
-  const [name, setName] = useState<string>('');
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [name, setName] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [savedPosts, setSavedPosts] = useState<Post[]>([]);
   const [likedPosts, setLikedPosts] = useState<Post[]>([]);
   const [userPosts, setUserPosts] = useState<Post[]>([]);
 
   const user = {
-    name: 'Pera',
-    username: 'Pera Peric',
+    name: "Pera",
+    username: "Pera Peric",
   };
 
   const fetchUserPosts = () => {
-    //user's saved, liked, and own posts
+    // user's saved, liked, and own posts
   };
 
   return (
@@ -38,7 +38,7 @@ const Profile = () => {
               className="input-field rounded-[50px] w-1/3 text-center"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder='name'
+              placeholder="name"
             />
           </div>
           <div className="mb-2">
@@ -48,7 +48,7 @@ const Profile = () => {
               className="input-field rounded-[50px] w-1/3 text-center"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder='username'
+              placeholder="username"
             />
           </div>
           <div className="mb-2">
@@ -58,38 +58,44 @@ const Profile = () => {
               className="input-field rounded-[50px] w-1/3 text-center"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='password'
+              placeholder="password"
             />
           </div>
-          <button type="submit" className="btn-primary bg-green-700 hover:bg-green-900 text-white w-1/3 h-full rounded-[50px] mt-3">
+          <button
+            type="submit"
+            className="btn-primary bg-green-700 hover:bg-green-900 text-white w-1/3 h-full rounded-[50px] mt-3"
+          >
             Update Profile
           </button>
         </form>
       </div>
 
       <div className="mt-8 flex ">
-        <div className="mb-8 w-full p-3">
-          <h2 className="text-xl text-black font-semibold mb-4">Saved Posts</h2>
-          <div className="bg-zinc-800 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
-            {/* Saved Posts */}
+      <div className="mb-8 w-full p-3">
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+            <h2 className="text-xl text-white font-semibold mb-4 text-center">
+              Saved Posts
+            </h2>
           </div>
         </div>
 
         <div className="mb-8 w-full p-3">
-          <h2 className="text-xl text-black font-semibold mb-4">Liked Posts</h2>
-          <div className="bg-zinc-800 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
-            {/* Liked Posts */}
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+            <h2 className="text-xl text-white font-semibold mb-4 text-center">
+              Liked Posts
+            </h2>
           </div>
         </div>
 
         <div className="mb-8 w-full p-3">
-          <h2 className="text-xl text-black font-semibold mb-4">Your Posts</h2>
-          <div className="bg-zinc-800 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
-            {/* My Posts */}
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+            <h2 className="text-xl text-white font-semibold mb-4 text-center">
+              Your Posts
+            </h2>
           </div>
         </div>
+
       </div>
-
     </div>
   );
 };
