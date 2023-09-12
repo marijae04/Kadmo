@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 
 import { Inter } from 'next/font/google'
 import Providers from './Providers'
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: 'Meet new cultures with Kadmo',
 }
 
-const font = Montserrat ({ 
+const font = Raleway ({ 
   subsets: ['latin'], 
 });
 

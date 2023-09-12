@@ -41,14 +41,14 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           {liked ? (
             <HeartIcon className="w-5 h-5 text-red-700" />
           ) : (
-            <HeartIcon className="w-5 h-5 text-gray-700 hover:gray-300 hover:opacity-50" />
+            <HeartIcon className="w-5 h-5 text-gray-400 hover:gray-100 hover:opacity-50" />
           )}
         </button>
         <button onClick={handleSave}>
           {saved ? (
             <BookmarkIcon className="w-5 h-5 text-black" />
           ) : (
-            <BookmarkIcon className="w-5 h-5 text-gray-700 hover:gray-300 hover:opacity-50" />
+            <BookmarkIcon className="w-5 h-5 text-gray-400 hover:gray-100 hover:opacity-50" />
           )}
         </button>
       </div>
@@ -68,11 +68,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <strong>Updated At:</strong> {updatedAt.toLocaleString()}
         </p>
       </div>
-      <div className="text-sm text-gray-500 mt-2 ml-2 mr-2">
+      <div className="text-sm text-gray-500 ml-2 mr-2">
         <a
           href={songURL ?? ""}
-          target="_blank"
-          rel="noopener noreferrer"
           className="text-red-500 hover:underline cursor-pointer"
         >
           Song Link

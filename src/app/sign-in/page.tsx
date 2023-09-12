@@ -1,143 +1,156 @@
 "use client";
 
-import { registerUser } from "../../actions/register-user.action";
-
-import { signIn } from "next-auth/react";
+import { useState } from 'react';
+import { registerUser } from '../../actions/register-user.action';
+import { signIn } from 'next-auth/react';
 
 export default function SignInPage() {
-    async function login(data: FormData){
-        const username = data.get("username")?.valueOf() as string;
-        const password = data.get("password")?.valueOf() as string;
+  const [isLoginVisible, setIsLoginVisible] = useState(true);
 
-        if (!username || !password) {
-            alert('Please fill all the fields')
-            return;
-        }
+  const toggleSections = () => {
+    setIsLoginVisible(!isLoginVisible);
+  };
 
-        try {
-            console.log("SALJEM")
-            const signInResponse = await signIn('credentials', {
-                username,
-                password,
-                redirect: false,
-                callbackUrl: '/'
-            })
+  async function login(data: FormData) {
+    const username = data.get('username')?.valueOf() as string;
+    const password = data.get('password')?.valueOf() as string;
 
-            console.log(signInResponse)
-
-            if(signInResponse?.error && signInResponse.error === 'CredentialsSignin'){
-                console.log(signInResponse)
-                alert('Invalid username or password');
-                return;
-            }else if(signInResponse?.error){
-                console.log(signInResponse)
-                alert('Error logging in')
-                return;
-            }else{
-                console.log(signInResponse)
-                window.location.href = '/';
-            }
-            
-        } catch (error) {
-            console.log(error)
-            alert('Error logging in')
-        }
+    if (!username || !password) {
+      alert('Please fill all the fields');
+      return;
     }
 
-    async function register(data: FormData) {
-        const name = data.get("name")?.valueOf() as string;
-        const email = data.get("email")?.valueOf() as string;
-        const username = data.get("username")?.valueOf() as string;
-        const password = data.get("password")?.valueOf() as string;
+    try {
+      const signInResponse = await signIn('credentials', {
+        username,
+        password,
+        redirect: false,
+        callbackUrl: '/',
+      });
 
-        if (!name || !email || !username || !password) {
-            alert('Please fill all the fields')
-            return;
-        }
+      if (signInResponse?.error && signInResponse.error === 'CredentialsSignin') {
+        alert('Invalid username or password');
+      } else if (signInResponse?.error) {
+        alert('Error logging in');
+      } else {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      console.log(error);
+      alert('Error logging in');
+    }
+  }
 
-        const result = await registerUser({ name, email, username, password });
+  async function register(data: FormData) {
+    const name = data.get('name')?.valueOf() as string;
+    const email = data.get('email')?.valueOf() as string;
+    const username = data.get('username')?.valueOf() as string;
+    const password = data.get('password')?.valueOf() as string;
 
-        if (result?.error) {
-            alert(result.error);
-            return;
-        }else{
-            alert('Successfully registered, please log in now');
-            window.location.href = '/sign-in';
-        }
+    if (!name || !email || !username || !password) {
+      alert('Please fill all the fields');
+      return;
     }
 
-    return (
-        
-        <div className="">
-            <div className="bg-black w-full h-full bg-opacity-70">
-                <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center">
-                    <div className="text-white text-center p-12 rounded-lg flex-1 order-2 mt-5 sm:order-1">
-                        <div className="text-4xl mb-4 font-semibold">Log in</div>
-                        <form action={login} className="mt-3">
-                        <div className="mb-4">
-                            <input
-                            type="text"
-                            name="username"
-                            placeholder="Username"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <button type="submit" className="btn-primary bg-green-700 hover:bg-green-900 tranisitio w-4/5  rounded-[50px]">
-                            Login
-                        </button>
-                        </form>
-                    </div>
+    const result = await registerUser({ name, email, username, password });
 
-                    <div className="ml-6 text-white text-center p-9 rounded-lg flex-1 order-1 mt-10 sm:order-2">
-                        <div className="text-4xl mb-4 font-semibold">Register</div>
-                        <form action={register} className="mt-4">
-                        <div className="mb-4">
-                            <input
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <input
-                            type="email"
-                            name="email"
-                            placeholder="email@gmail.com"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <input
-                            type="text"
-                            name="username"
-                            placeholder="Username"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            className="input-field w-4/5 text-black rounded-[50px] text-center"
-                            />
-                        </div>
-                        <button type="submit" className="btn-primary bg-green-700 hover:bg-green-900 tranisitio w-4/5 rounded-[50px]">
-                            Register
-                        </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+    if (result?.error) {
+      alert(result.error);
+    } else {
+      alert('Successfully registered, please log in now');
+      window.location.href = '/sign-in';
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center p-4">
+      <div className="bg-black bg-opacity-80 px-4 py-4 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+        {isLoginVisible ? (
+          <div className="text-white text-center p-12 rounded-lg flex-1 order-2 mt-5 sm:order-1">
+            <div className="text-4xl mb-4 font-semibold">Log in</div>
+            <form action={login} className="mt-3">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn-primary bg-green-700 hover:bg-green-900 transition w-full rounded-[50px]"
+              >
+                Login
+              </button>
+            </form>
+            <p
+              className="mt-4 text-sm text-white cursor-pointer"
+              onClick={toggleSections}
+            >
+              First time in Kadmo? Create an account
+            </p>
+          </div>
+        ) : (
+          <div className="text-white text-center p-12 rounded-lg flex-1 order-2 mt-5 sm:order-1">
+            <div className="text-4xl mb-4 font-semibold">Register</div>
+            <form action={register} className="mt-3">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email@gmail.com"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="input-field w-full text-black rounded-[50px] text-center"
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn-primary bg-green-700 hover:bg-green-900 transition w-full rounded-[50px]"
+              >
+                Register
+              </button>
+            </form>
+            <p
+              className="mt-4 text-sm text-white cursor-pointer"
+              onClick={toggleSections}
+            >
+              Already have an account? Login
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
