@@ -1,13 +1,18 @@
 import { Country, Post, User } from "@prisma/client";
 import React, { useState } from "react";
 import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/solid";
+import { savePostAction } from "../actions/save-post.action";
+import { likePostAction } from "../actions/like-post.action";
 
 interface PostCardProps {
   post: Post & { author: User } & { country: Country };
+  likedPost: boolean;
+  savedPost: boolean;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ post }) => {
+const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
   const {
+    id,
     title,
     content,
     imageURL,
@@ -18,16 +23,109 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     songURL,
   } = post;
 
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [liked, setLiked] = useState(likedPost);
+  const [saved, setSaved] = useState(savedPost);
 
   const handleLike = () => {
-    setLiked(!liked);
+    if(liked){
+      unlikePost()
+    }else{
+      likePost()
+    }
   };
 
+  const likePost = async () => {
+    setLiked(true);
+    likePostAction(id)
+    .then((response) => {
+
+      if(response?.error){
+        console.log(response.error);
+        alert(response.error)
+        setLiked(!liked);
+      }else{
+        console.log("Successfully liked")
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Error liking post');
+      setLiked(!liked);
+    })
+  }
+
+  const unlikePost = async () => {
+    setLiked(false);
+    likePostAction(id, false)
+    .then((response) => {
+
+      if(response?.error){
+        console.log(response.error);
+        alert(response.error);
+        setLiked(!liked);
+      }else{
+        console.log("Successfully unliked")
+        
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Error unliking post');
+      setLiked(!liked);
+    })
+  }
+
   const handleSave = () => {
-    setSaved(!saved);
+    console.log("handleSave",saved)
+    if(saved){
+      console.log("SALJEM unsavePost")
+      unsavePost()
+    }else{
+      console.log("SALJEM SAVE")
+      savePost()
+    }
   };
+
+  const savePost = async () => {
+    setSaved(true);
+    savePostAction(id)
+    .then((response) => {
+
+      if(response?.error){
+        console.log(response.error);
+        alert(response.error)
+        setSaved(!saved);
+      }else{
+        console.log("Successfully saved")
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Error saving post!!');
+      setSaved(!saved);
+    })
+  }
+
+  const unsavePost = async () => {
+    setSaved(false);
+    savePostAction(id, false)
+    .then((response) => {
+
+      if(response?.error){
+        console.log(response.error);
+        alert(response.error);
+        setSaved(!saved);
+      }else{
+        console.log("Successfully saved")
+        
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Error saving post!!');
+      setSaved(!saved);
+    })
+  }
 
   return (
     <div className="bg-gray-300 bg-opacity-90 rounded-lg shadow-lg hover:bg-gray-200 w-9/10 ml-5 mr-5">

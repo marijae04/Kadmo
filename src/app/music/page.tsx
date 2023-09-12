@@ -45,7 +45,11 @@ export default function Recipes() {
               return (
                 <div key={index}>
 
-                  <PostCard post={post} />
+                  <PostCard
+                    likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
+                    savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
+                    post={post as any}
+                  />
                 </div>
               );
             })}

@@ -40,12 +40,15 @@ export default function Recipes() {
           <h1 className="text-white text-2xl font-semibold text-primary mt-10 ml-5 mb-1">NEWS: {posts?.length ?? 0} </h1>
           
           <div className="grid gap-x-0 gap-y-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            
+
             {posts && posts.map((post, index) => {
               return (
                 <div key={index}>
-
-                  <PostCard post={post} />
+                  <PostCard
+                    likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
+                    savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
+                    post={post as any}
+                  />
                 </div>
               );
             })}
