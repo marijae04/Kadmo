@@ -1,5 +1,5 @@
 "use client"
-import { Country, Post, User } from "@prisma/client";
+import { Category, Country, Post, User } from "@prisma/client";
 import React, { useState } from "react";
 import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { savePostAction } from "../actions/save-post.action";
@@ -122,10 +122,28 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
       });
   };
 
+  const getImageUrl = () =>{
+    if(category != Category.Music) return imageURL ?? '';
+
+    if(songURL?.includes('youtube')){
+      const url = new URL(songURL ?? '');
+      const videoId = url.searchParams.get('v');
+      console.log("RETURNING URL", `https://img.youtube.com/vi/${videoId}/0.jpg`)
+      return `https://img.youtube.com/vi/${videoId}/0.jpg`;
+    }else if(songURL?.includes('youtu.be')){
+      const url = new URL(songURL ?? '');
+      const videoId = url.pathname.split('/')[1];
+      console.log("RETURNING URL", `https://img.youtube.com/vi/${videoId}/0.jpg`)
+      return `https://img.youtube.com/vi/${videoId}/0.jpg`;
+    }else{
+      return imageURL ?? '';
+    }
+  }
+
   return (
     <div className="bg-zinc-300 bg-opacity-90 rounded-[5px] shadow-lg hover:bg-zinc-200 w-120 ml-3 mr-3">
       <img
-        src={imageURL ?? ""}
+        src={getImageUrl()}
         alt={title}
         sizes="(max-inline-size: 768px) 100vw, 700px "
         className="w-full h-36 object-cover rounded-[3px] "
