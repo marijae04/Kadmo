@@ -2,6 +2,7 @@
 
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import prisma from "../app/db";
 
 export async function getUserData() {
     try{
@@ -12,13 +13,13 @@ export async function getUserData() {
             redirect('/sign-in')
         }
 
-        const dbUser = await prisma.user.findUnique({ id: session.user.id });
+        const dbUser = await prisma.user.findUnique({where: { email: session.user.email }});
 
         if(!dbUser){
             return { error: 'User not found'}
         }
 
-        delete dbUser.password;
+        delete (dbUser as any).password;
 
         return dbUser;
     }catch(error){

@@ -165,7 +165,7 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
         </button>
         
         {/*Popravi link*/}
-        <Link href={`/post`} className="mt-2">
+        <Link href={`/post/${id}`} className="mt-2">
             <button>
               <InformationCircleIcon className="w-5 h-5 text-black" />
             </button>

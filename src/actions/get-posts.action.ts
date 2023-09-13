@@ -5,7 +5,7 @@ import { Continent } from "../enums/continent.enum";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-export async function getPostsAction(filters?: { continent?: Continent, country?: string, category?: Category, type?: "My posts" | "Saved posts" | "Liked posts"}){
+export async function getPostsAction(filters?: { postId?: string; continent?: Continent, country?: string, category?: Category, type?: "My posts" | "Saved posts" | "Liked posts"}){
     try{
 
         const session = await getServerSession();
@@ -25,6 +25,12 @@ export async function getPostsAction(filters?: { continent?: Continent, country?
         }
 
         console.log("Getting posts");
+
+        if(filters?.postId){
+            const post = await prisma.post.findUnique({ where: { id: filters.postId }, include: { author: true, country: true }});
+            return { posts: [post]};
+        }
+
 
         const where: any= {};
         if(filters?.continent) where.continent = filters.continent;

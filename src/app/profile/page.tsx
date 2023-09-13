@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { getPostsAction } from '../../actions/get-posts.action';
 import PostCard from '../Post-card';
+import { updateProfileDataAction } from '../../actions/update-profile-data.action';
+import { getUserData } from '../../actions/get-user-data.action';
 
 const Profile = () => {
 
@@ -19,6 +21,21 @@ const Profile = () => {
 
   useEffect(() => {
     getPosts("My posts");
+
+    getUserData()
+    .then( (response: any)=>{
+      if(response?.error) {
+        console.log(response.error);
+        alert(`Error getting user data: ${response.error}`);
+      } else {
+        console.log('Successfully got user data');
+        setName(response.name);
+        setUsername(response.username);
+      }
+    }).catch(error =>{
+      console.log(error);
+      alert('Error getting user data');
+    })
   }, []);
 
   const getPosts = async (postType: typeof selectedPosts) => {
@@ -36,6 +53,32 @@ const Profile = () => {
       alert('Error getting posts');
     }
   };
+
+  const updateProfileData = async (event: any) => {
+    event.preventDefault();
+
+    const dataForUpdating:any = {};
+    if(name.trim() !== '') dataForUpdating.name = name;
+    if(username.trim() !== '') dataForUpdating.username = username;
+    if(password.trim() !== '') dataForUpdating.password = password;
+
+    updateProfileDataAction(dataForUpdating)
+    .then((response) => {
+      if(response?.error) {
+        console.log(response.error);
+        alert(`Error updating profile data: ${response.error}`);
+      } else {
+        console.log('Successfully updated profile data');
+        alert('Successfully updated profile data')
+        setPassword('');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      alert('Error updating profile data');
+    })
+    console.log(name, username, password);
+  }
 
   const { data: session, status } = useSession();
 
@@ -56,7 +99,7 @@ const Profile = () => {
       <div className="container mt-4 ml-5 mr-5 flex">
         <div className="w-1/2 pr-3">
           <div className="justify-center mt-2">
-            <h1 className="text-2xl font-semibold">{user.name}</h1>
+            <h1 className="text-2xl font-semibold">{name}</h1>
           </div>
 
           <div className="mt-4">
@@ -94,7 +137,7 @@ const Profile = () => {
                 />
               </div>
               <button
-                type="submit"
+                onClick = {(event) => updateProfileData(event)}
                 className="btn-primary bg-green-700 hover:bg-green-900 text-white w-1/2 h-full rounded-[50px] mt-3"
               >
                 Update Profile

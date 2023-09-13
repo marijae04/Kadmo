@@ -1,15 +1,35 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { HeartIcon, BookmarkIcon } from "@heroicons/react/24/outline";
+import { usePathname, useRouter } from "next/navigation";
 import { Country, Post, User } from "@prisma/client";
-import PostCard from "../Post-card";
+import { getPostsAction } from "../../../actions/get-posts.action";
 
-interface PostPageProps {
-  post: Post & { author: User } & { country: Country };
-}
+const PostPage: React.FC<any> = () => {
 
-const PostPage: React.FC<PostPageProps> = ({ post }) => {
+  // const router = useRouter();
+
+  const pathName = usePathname()?.split('/')?.pop();
+
+  const [post, setPost] = useState<Post & {author: User} & { country: Country} | undefined>(undefined);
+
+  useEffect(() =>{
+    getPostsAction({postId: pathName})
+    .then((response: any) =>{
+      if(response?.error) {
+        console.log(response.error);
+        alert(`Error getting post: ${response.error}`);
+      } else {
+        console.log('Successfully got post');
+        console.log(response.posts[0])
+        setPost(response.posts  [0] as any);
+      }
+    })
+    .catch(error =>{
+      console.log(error);
+      alert('Error getting post');
+    })
+  },[])
 
   const isMusicCategory = post?.category === "Music";
 
@@ -18,11 +38,9 @@ const PostPage: React.FC<PostPageProps> = ({ post }) => {
       <h1 className="text-3xl font-semibold mb-4">{post?.title}</h1>
 
       <div className="relative h-64 mb-6">
-        <Image
+        <img
           src={post?.imageURL ?? "/placeholder-image.jpg"}
-          alt={post?.title}
-          layout="fill"
-          objectFit="cover"
+          alt={post?.title ?? ''}
           className="rounded-md"
         />
       </div>
@@ -38,11 +56,11 @@ const PostPage: React.FC<PostPageProps> = ({ post }) => {
         </p>
         <p>
           <strong>Created At:</strong>{" "}
-          {new Date(post?.createdAt).toLocaleString()}
+          {new Date(post?.createdAt!).toLocaleString()}
         </p>
         <p>
           <strong>Updated At:</strong>{" "}
-          {new Date(post?.updatedAt).toLocaleString()}
+          {new Date(post?.updatedAt!).toLocaleString()}
         </p>
       </div>
 
