@@ -2,10 +2,10 @@
 "use client"
 import Link from "next/link";
 import React, { useState, useCallback, useEffect } from "react";
-import { MagnifyingGlassIcon, UserCircleIcon, ChevronDownIcon, ChevronUpIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, ChevronDownIcon, ChevronUpIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import AppBarItem from "./AppBarItems";
 import MobileMenu from "./MobileMenu";
-import LoginButton from "./LoginButton";
+import ProfileMenu from "./ProfileMenu";
 
 const TOP_OFFSET = 66;
 
@@ -55,22 +55,17 @@ const AppBar = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
 
-        <div className="flex flex-row ml-auto items-end">
-          <a href="/add-post" className="lg:flex items-center gap-2 cursor-pointer relative">
-            <PencilSquareIcon className="hidden lg:w-6 lg:h-6 text-gray-200 hover:text-gray-300 cursor-pointer transition" />
-            <span className="text-gray-200 hover:text-gray-300 cursor-pointer transition">Add Post</span>
-          </a>
+        <div className="flex flex-row mr-3 ml-auto items-end">
+          <Link href="/add-post">
+              <button className="items-center mr-7 w-full gap-4 cursor-pointer relative bg-white hover:bg-gray-300 rounded-[50px] ">
+                <span className="text-black cursor-pointer transition">
+                  Add Post
+                </span>
+              </button>
+          </Link>
         </div>
-
-        <LoginButton/>
-
-        <Link href="/profile">
-          <div className="lg:flex items-center gap-4 ml-5 cursor-pointer relative">
-            <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <UserCircleIcon className="w-9 text-gray-200 hover:text-gray-300 cursor-pointer transition" />
-            </div>
-          </div>
-        </Link>
+        
+        <ProfileMenu visible={true} /> 
         
       </div>
     </nav>

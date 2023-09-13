@@ -30,7 +30,6 @@ export default function Home() {
 
   if (status === "unauthenticated") {
     return router.push('/sign-in');
-    // return <p>Access Denied</p>;
   }
 
   const handleSearch = (query: string) => {

@@ -6,23 +6,50 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/wallpaper.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('/images/wallpaper.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: 100vh; 
+  display: flex; 
 }
 
 #__next {
-  @apply h-full;
-
+  flex: 1; 
 }
 
-html {
-  @apply h-full;
+html, #__next {
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh; 
 }
 
 .imageURL {
   position: relative;
   inline-size: 100%;
   max-inline-size: 700px;
+}
+
+@media (min-width: 1024px) {
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px; 
+  }
+}
+
+@media (max-width: 1023px) {
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 12px; 
+  }
+}
+
+@media (max-width: 767px) {
+  .post-grid {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -123,7 +123,7 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
   };
 
   return (
-    <div className="bg-zinc-300 bg-opacity-90 rounded-[3px] shadow-lg hover:bg-zinc-200 w-9/10 ml-5 mr-5">
+    <div className="bg-zinc-300 bg-opacity-90 rounded-[5px] shadow-lg hover:bg-zinc-200 w-120 ml-3 mr-3">
       <img
         src={imageURL ?? ""}
         alt={title}

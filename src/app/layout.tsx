@@ -10,20 +10,22 @@ export const metadata: Metadata = {
   description: 'Meet new cultures with Kadmo',
 }
 
-const font = Outfit ({ 
-  subsets: ['latin'], 
+const font = Outfit({
+  subsets: ['latin'],
 });
 
 export default function RootLayout({
   children,
+  showAppBar = true,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
+  showAppBar?: boolean;
 }) {
   return (
     <html lang="en">
       <body className={font.className}>
         <Providers>
-          <AppBar />
+          {showAppBar && <AppBar />}
           <div className={"pt-14 relative h-full w-full bg-[url('/images/wallpaper.jpg')] bg-no-repeat bg-center bg-fixed bg-cover min-h-screen "}>
             {children}
           </div>
