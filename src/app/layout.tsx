@@ -1,18 +1,16 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Raleway } from 'next/font/google'
-
+import { Outfit } from 'next/font/google'
 import { Inter } from 'next/font/google'
 import Providers from './Providers'
 import AppBar from './AppBar'
-
 
 export const metadata: Metadata = {
   title: 'Kadmo',
   description: 'Meet new cultures with Kadmo',
 }
 
-const font = Raleway ({ 
+const font = Outfit ({ 
   subsets: ['latin'], 
 });
 
@@ -20,9 +18,8 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-  }) {
+}) {
   return (
-    
     <html lang="en">
       <body className={font.className}>
         <Providers>

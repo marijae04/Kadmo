@@ -33,7 +33,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         <input
           type="text"
           placeholder="Search..."
-          className="w-full pl-10 pr-3 py-2 rounded-full border focus:outline-none focus:ring focus:border-neutral"
+          className="w-full h-7 pl-10 pr-3 py-2 rounded-full border focus:outline-none focus:ring focus:border-neutral"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyPress={handleKeyPress}

@@ -3,17 +3,26 @@
 @tailwind utilities;
 
 body {
-  @apply bg-zinc-900 h-full overflow-x-hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
+
 #__next {
   @apply h-full;
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --foreground-rgb: 255, 255, 255;
-    }
-  }
 }
+
 html {
   @apply h-full;
+}
+
+.imageURL {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 700px;
 }

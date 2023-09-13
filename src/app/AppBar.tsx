@@ -35,8 +35,8 @@ const AppBar = () => {
   }, []);
 
   return (
-    <nav className={`w-full fixed z-40 ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}`}>
-      <div className="px-4 md:px-16 py-6 flex flex-row items-center transition duration-500">
+    <nav className={`w-full h-50 fixed z-40 ${showBackground ? 'bg-black' : ''}`}>
+      <div className="px-4 md:px-16 py-4 flex flex-row items-center transition duration-500">
 
         <Link href="/" passHref>
           <img src="/images/logo.png" className="h-5 lg:h-8 mt" alt="Logo" />
@@ -55,7 +55,7 @@ const AppBar = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
 
-        <div className="flex flex-row ml-auto gap-7 items-center">
+        <div className="flex flex-row ml-auto items-end">
           <a href="/add-post" className="lg:flex items-center gap-2 cursor-pointer relative">
             <PencilSquareIcon className="hidden lg:w-6 lg:h-6 text-gray-200 hover:text-gray-300 cursor-pointer transition" />
             <span className="text-gray-200 hover:text-gray-300 cursor-pointer transition">Add Post</span>

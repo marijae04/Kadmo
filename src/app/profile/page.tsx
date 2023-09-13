@@ -45,18 +45,16 @@ const Profile = () => {
   }
 
   if (status === "unauthenticated") {
-    //redirect to sign-in page
-
     return router.push('/sign-in');
   }
 
   const user = {
-    name: "Pera",
-    username: "Pera Peric",
+    name: 'pera',
+    username: 'peric',
   };
 
   const fetchUserPosts = () => {
-    // user's saved, liked, and own posts
+
   };
 
   return (
@@ -111,7 +109,7 @@ const Profile = () => {
 
       <div className="mt-8 flex ">
       <div onClick={() => getPosts("Saved posts")} className="cursor-pointer mb-8 w-full p-3">
-          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               Saved Posts
             </h2>
@@ -119,7 +117,7 @@ const Profile = () => {
         </div>
 
         <div onClick={() => getPosts("Liked posts")} className="cursor-pointer mb-8 w-full p-3">
-          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               Liked Posts
             </h2>
@@ -127,7 +125,7 @@ const Profile = () => {
         </div>
 
         <div onClick={() => getPosts("My posts")} className="cursor-pointer mb-8 w-full p-3">
-          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 w-full h-full mr-5">
+          <div className="bg-zinc-700 bg-opacity-50 rounded-lg p-10 mr-5">
             <h2 className="text-xl text-white font-semibold mb-4 text-center">
               My Posts
             </h2>
@@ -140,18 +138,16 @@ const Profile = () => {
         <h2 className="text-4xl text-white font-semibold mb-4 text-center">
           {selectedPosts}
         </h2>
-        <div>
-          {
-            posts?.map((post, index)  => {
-
-              return <PostCard
-              key={index}
-              likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
-              savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
-              post={post as any}
-            />
-            })
-          }
+        <div className="grid gap-x-0 gap-y-5 grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-4">
+          {posts?.map((post, index) => (
+            <div key={index} className="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+              <PostCard
+                likedPost={post.likedByUsersIDs.includes(session?.user?.id!)}
+                savedPost={post.savedByUsersIDs.includes(session?.user?.id!)}
+                post={post as any}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

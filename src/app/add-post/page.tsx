@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
 import { Category, Country } from "@prisma/client";
-import Link from "next/link";
 import { createPostAction } from "../../actions/create-post-action";
 
 const AddPost: React.FC = () => {
@@ -15,7 +14,7 @@ const AddPost: React.FC = () => {
     if (category === "Music") {
       return (
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Song URL
           </label>
           <input
@@ -40,35 +39,33 @@ const AddPost: React.FC = () => {
       country,
     };
 
-    
     createPostAction({ title, content, imageURL: imageUrl, category, country })
-    .then(response =>{
-      if(response?.error){
-        console.log(response.error)
-        alert(`Error creating post: ${response.error}`)
-      }else{
-        alert('Post created successfully');
-        setTitle("");
-        setContent("");
-        setImageUrl("");
-        setCategory("Destination");
-        setCountry("");
-      }
-    })
-    .catch(error =>{
-      console.log(error);
-      alert('Error creating post');
-    })
-
-    
+      .then((response) => {
+        if (response?.error) {
+          console.log(response.error);
+          alert(`Error creating post: ${response.error}`);
+        } else {
+          alert('Post created successfully');
+          setTitle("");
+          setContent("");
+          setImageUrl("");
+          setCategory("Destination");
+          setCountry("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Error creating post');
+      });
   };
 
   return (
-    <div className="container mx-auto mt-4 p-4 ml-5">
-      <h1 className="text-2xl font-semibold">Create a New Post</h1>
+    <div className="container mx-auto mt-4 p-4 sm:p-8">
+      <h1 className="text-3xl font-semibold text-center mb-6">Create a New Post</h1>
       <form onSubmit={handleSubmit}>
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Title
           </label>
           <input
@@ -80,20 +77,22 @@ const AddPost: React.FC = () => {
             required
           />
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Content
           </label>
           <textarea
             placeholder="Enter content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2 w-full h-32"
+            className="border border-gray-300 rounded-lg p-2 w-full h-40"
             required
           />
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Image URL
           </label>
           <input
@@ -104,8 +103,9 @@ const AddPost: React.FC = () => {
             className="border border-gray-300 rounded-lg p-2 w-full"
           />
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Category
           </label>
           <select
@@ -120,8 +120,11 @@ const AddPost: React.FC = () => {
             <option value="Events">Events</option>
           </select>
         </div>
+
+        {renderSongUrlInput()}
+
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
             Country
           </label>
           <input
@@ -133,14 +136,16 @@ const AddPost: React.FC = () => {
             required
           />
         </div>
-        {renderSongUrlInput()}
-        <button
-          onSubmit={handleSubmit}
-          type="submit"
-          className="bg-green-700 text-white font-bold py-2 px-4 rounded-full hover:bg-green-900"
-        >
-          Create Post
-        </button>
+        
+        <div className="text-center">
+          <button
+            type="submit"
+            className="bg-green-700 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-900"
+          >
+            Create Post
+          </button>
+        </div>
+
       </form>
     </div>
   );
