@@ -35,7 +35,7 @@ const AppBar = () => {
   }, []);
 
   return (
-    <nav className={`w-full h-50 fixed z-40 ${showBackground ? 'bg-black' : ''}`}>
+    <nav className={`w-full h-50 fixed z-40 ${showBackground ? 'bg-black bg-opacity-60' : ''}`}>
       <div className="px-4 md:px-16 py-4 flex flex-row items-center transition duration-500">
 
         <Link href="/" passHref>
@@ -50,15 +50,15 @@ const AppBar = () => {
         </div>
 
         <div onClick={toggleMobileMenu} className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
-          <p className="text-white text-sm">Browse</p>
-          <ChevronDownIcon className={`w-4 text-white fill-white transition ${showMobileMenu ? 'rotate-180' : 'rotate-0'}`} />
+          <p className="text-black text-sm">Browse</p>
+          <ChevronDownIcon className={`w-4 text-black fill-black transition ${showMobileMenu ? 'rotate-180' : 'rotate-0'}`} />
           <MobileMenu visible={showMobileMenu} />
         </div>
 
         <div className="flex flex-row mr-3 ml-auto items-end">
           <Link href="/add-post">
-              <button className="items-center mr-7 w-full gap-4 cursor-pointer relative bg-white hover:bg-gray-300 rounded-[50px] ">
-                <span className="text-black cursor-pointer transition">
+              <button className="items-center mr-7 w-full gap-4 cursor-pointer relative bg-lime-700 hover:bg-lime-900 rounded-[50px] ">
+                <span className="text-white cursor-pointer transition">
                   Add Post
                 </span>
               </button>

@@ -10,7 +10,7 @@ interface AppBarItemProps {
 const AppBarItem: React.FC<AppBarItemProps> = ({ label, active, href }) => {
   return (
     <Link href={href}>
-      <div className={active ? 'text-white font-semibold cursor-default' : 'text-white hover:text-gray-300 cursor-pointer transition'}>
+      <div className={active ? 'text-black font-semibold cursor-default' : 'text-black hover:text-gray-300 cursor-pointer transition'}>
         {label}
       </div>
     </Link>

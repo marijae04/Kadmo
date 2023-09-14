@@ -164,7 +164,6 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
           )}
         </button>
         
-        {/*Popravi link*/}
         <Link href={`/post/${id}`} className="mt-2">
             <button>
               <InformationCircleIcon className="w-5 h-5 text-black" />
@@ -176,10 +175,10 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
       <p className="text-sm text-gray-800 mb-2 line-clamp-2 ml-2 mr-2">{content}</p>
       <div className="text-xs text-zinc-600 ml-2 mr-2">
         <p>
-          <strong>Country:</strong> {country.name}
+          <strong>Country:</strong> {country?.name}
         </p>
         <p>
-          <strong>Author:</strong> {author.name}
+          <strong>Author:</strong> {author?.name}
         </p>
         <p>
           <strong>Created At:</strong> {createdAt.toLocaleString()}
@@ -190,7 +189,7 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
       </div>
       {category === "Music" && (
         <button
-              className=" bg-green-700 hover:bg-green-900 rounded-[50px] ml-2 mb-3 mt-2 w-[10vw]">
+              className=" bg-lime-700 hover:bg-lime-900 rounded-[50px] ml-2 mb-3 mt-2 w-[15vw]">
             <a
               href={songURL ?? ""}
               className="text-white text-center"

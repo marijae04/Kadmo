@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import { useSession } from 'next-auth/react';
 
 interface ProfileMenuProps {
@@ -27,7 +27,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ visible }) => {
   return (
     <div className="item-right">
       <div className="cursor-pointer" onClick={toggleMenu}>
-        <UserCircleIcon className="h-8 w-8 text-white hover:text-gray-300" />
+        <Bars3Icon className="h-8 w-8 text-black hover:text-gray-300" />
       </div>
       {menuVisible && (
         <div className="bg-black w-56 absolute top-8 right-0 py-5 flex-col border-2 border-gray-800 flex">

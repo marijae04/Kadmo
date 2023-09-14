@@ -65,11 +65,16 @@ export default function SignInPage() {
 
   return (
     <RootLayout showAppBar={false}>
-      <img src="/images/logo.png" className="h-15 w-40 lg:h-8 ml-10 absolute left-0" alt="Logo" />
-        <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center p-20">
+
+      {/*popravi hidraciju*/}
+      <div>
+        <img src="/images/logo.png" className="h-15 w-40 lg:h-8 ml-10 absolute left-0" alt="Logo" />
+      </div>
+
+        <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center mt-1">
           <div className="bg-black bg-opacity-80 px-4 py-4 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             {isLoginVisible ? (
-              <div className="text-white text-center p-12 rounded-lg flex-1 order-2 mt-5 sm:order-1">
+              <div className="text-white text-center p-12 rounded-lg flex-1 order-2 sm:order-1">
                 <div className="text-4xl mb-4 font-semibold">Log in</div>
                 <form action={login} className="mt-3">
                   <div className="mb-4">
@@ -90,7 +95,7 @@ export default function SignInPage() {
                   </div>
                   <button
                     type="submit"
-                    className="btn-primary bg-green-700 hover:bg-green-900 transition w-full rounded-[50px]"
+                    className="btn-primary bg-lime-700 hover:bg-lime-900 transition w-full rounded-[50px]"
                   >
                     Login
                   </button>
@@ -140,7 +145,7 @@ export default function SignInPage() {
                   </div>
                   <button
                     type="submit"
-                    className="btn-primary bg-green-700 hover:bg-green-900 transition w-full rounded-[50px]"
+                    className="btn-primary bg-lime-700 hover:bg-lime-900 transition w-full rounded-[50px]"
                   >
                     Register
                   </button>

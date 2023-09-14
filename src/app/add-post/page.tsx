@@ -140,7 +140,7 @@ const AddPost: React.FC = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-green-700 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-900"
+            className="bg-lime-700 text-white font-semibold py-2 px-4 rounded-full hover:bg-lime-900"
           >
             Create Post
           </button>
