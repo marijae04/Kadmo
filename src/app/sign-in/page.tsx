@@ -66,7 +66,6 @@ export default function SignInPage() {
   return (
     <RootLayout showAppBar={false}>
 
-      {/*popravi hidraciju*/}
       <div>
         <img src="/images/logo.png" className="h-15 w-40 lg:h-8 ml-10 absolute left-0" alt="Logo" />
       </div>
