@@ -49,7 +49,7 @@ const AddPost: React.FC = () => {
           setTitle("");
           setContent("");
           setImageUrl("");
-          setCategory("Destination");
+          setCategory(Category.Destination);
           setCountry("");
         }
       })
@@ -114,10 +114,10 @@ const AddPost: React.FC = () => {
             className="border border-gray-300 rounded-lg p-2 w-full"
             required
           >
-            <option value="Destination">Destination</option>
-            <option value="Recipes">Recipes</option>
-            <option value="Music">Music</option>
-            <option value="Events">Events</option>
+            <option value={Category.Destination}>{Category.Destination}</option>
+            <option value={Category.Recipe}>{Category.Recipe}</option>
+            <option value={Category.Music}>{Category.Music}</option>
+            <option value={Category.Event}>{Category.Event}</option>
           </select>
         </div>
 
