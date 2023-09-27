@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={font.className}>
         <Providers>
           {showAppBar && <AppBar />}
-          <div className={"pt-14 relative h-full w-full bg-[url('/images/wallpaper.jpg')] bg-no-repeat bg-center bg-fixed bg-cover min-h-screen "}>
+          <div className={"pt-14 relative h-full w-full bg-[url('/images/wallpaper.jpg')] bg-no-repeat bg-center bg-fixed bg-cover min-h-screen"}>
             {children}
           </div>
         </Providers>

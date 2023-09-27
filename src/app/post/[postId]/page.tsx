@@ -87,12 +87,11 @@ const PostPage: React.FC<any> = () => {
 
       {isMusicCategory && post?.songURL && (
         <div className="text-sm text-gray-200 mb-4">
-          <a
-            href={post?.songURL}
-            className="text-white hover:underline cursor-pointer"
-          >
-            Listen to the song
-          </a>
+          <button className="items-center mr-7 w-full gap-4 cursor-pointer relative bg-lime-700 hover:bg-lime-900 rounded-[50px] h-6">
+            <span className="text-white tetx-1xl placeholder:cursor-pointer transition">
+              Listen a song
+            </span>
+          </button>
         </div>
       )}
     </div>
