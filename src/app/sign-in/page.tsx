@@ -67,10 +67,10 @@ export default function SignInPage() {
     <RootLayout showAppBar={false}>
 
       <div>
-        <img src="/images/logo.png" className="h-15 w-40 lg:h-8 ml-10 absolute left-0" alt="Logo" />
+        <img src="/images/logo.png" className="h-15 w-40 lg:h-8 ml-10 absolute left-0" alt="Logo"/>
       </div>
 
-        <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center mt-1">
+        <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center mt-1 overflow:auto">
           <div className="bg-black bg-opacity-80 px-4 py-4 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             {isLoginVisible ? (
               <div className="text-white text-center p-12 rounded-lg flex-1 order-2 sm:order-1">

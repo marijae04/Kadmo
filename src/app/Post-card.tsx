@@ -141,7 +141,7 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
   }
 
   return (
-    <div className="bg-zinc-300 bg-opacity-90 rounded-[5px] shadow-lg hover:bg-zinc-200 w-120 ml-3 mr-3">
+    <div className="bg-zinc-300 bg-opacity-90 rounded-[5px] shadow-lg w-120 h-96 hover:bg-zinc-200  ml-3 mr-3 mb-5">
       <img
         src={getImageUrl()}
         alt={title}
@@ -188,15 +188,16 @@ const PostCard: React.FC<PostCardProps> = ({ likedPost, savedPost, post }) => {
         </p>
       </div>
       {category === "Music" && (
-        <button
-              className=" bg-lime-700 hover:bg-lime-900 rounded-[50px] ml-2 mb-3 mt-2 w-[15vw]">
+        <div className="flex justify-center mt-9 mb-5">
+          <button
+            className="bg-lime-700 hover:bg-lime-900 rounded-full w-[30vw] sm:w-[30vw] md:w-[30vw] lg:w-[20vw] xl:w-[8vw]">
             <a
               href={songURL ?? ""}
-              className="text-white text-center"
-            >
+              className="text-white text-center px-4 py-2 font-semibold">
               Song Link
             </a>
-        </button>
+          </button>
+        </div>
       )}
     </div>
   );
