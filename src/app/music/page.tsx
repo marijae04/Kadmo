@@ -48,7 +48,10 @@ export default function Music() {
     <>
       <div>
         <div>
-          <div className="flex justify-center w-full mr-5 mt-16">
+          <h1 className="text-black text-2xl font-semibold text-primary mt-7 ml-5 mb-1">
+            MUSIC: {posts?.length ?? 0}
+          </h1>
+          <div className="flex justify-center w-full mr-5 mt-1">
             <Search onSearch={handleSearch} />
           </div>
           
